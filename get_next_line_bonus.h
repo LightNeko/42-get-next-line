@@ -6,7 +6,7 @@
 /*   By: znicola <znicola@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:18:25 by znicola           #+#    #+#             */
-/*   Updated: 2024/10/21 13:19:59 by znicola          ###   ########.fr       */
+/*   Updated: 2024/10/21 14:23:16 by znicola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
-# include <limits.h>
 # include <stdio.h>
 
 char	*get_next_line(int fd);
