@@ -6,12 +6,11 @@
 /*   By: znicola <znicola@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 19:59:14 by znicola           #+#    #+#             */
-/*   Updated: 2024/10/21 13:15:30 by znicola          ###   ########.fr       */
+/*   Updated: 2024/10/21 14:21:25 by znicola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*extend_malloc(char *ptr, size_t len, size_t new_len)
 {
