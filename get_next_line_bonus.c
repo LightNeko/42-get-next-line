@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znicola <znicola@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 19:59:14 by znicola           #+#    #+#             */
-/*   Updated: 2024/10/21 13:15:30 by znicola          ###   ########.fr       */
+/*   Updated: 2024/10/21 13:33:32 by znicola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 static char	*extend_malloc(char *ptr, size_t len, size_t new_len)
 {
@@ -71,8 +70,8 @@ static void	free_data(char **data, char *str, char *buffer, int fcase)
 	if (fcase == -1)
 	{
 		free(buffer);
-		buffer = NULL;
 		free(*data);
+		buffer = NULL;
 		*data = NULL;
 	}
 	if (fcase == -2)
@@ -120,25 +119,25 @@ static int	read_line(int fd, char *buffer, char **data)
 
 char	*get_next_line(int fd)
 {
-	static char	*data;
+	static char	*data[FOPEN_MAX];
 	char		*buffer;
 	char		*str;
 	int			check;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	str = NULL;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	check = read_line(fd, buffer, &data);
-	free_data(&data, str, buffer, check);
+	check = read_line(fd, buffer, &data[fd]);
+	free_data(&data[fd], str, buffer, check);
 	if (check < 0)
 		return (NULL);
-	if (data)
-		str = check_eol(&data);
-	free_data(&data, str, buffer, 1);
-	if (data && !str)
+	if (data[fd])
+		str = check_eol(&data[fd]);
+	free_data(&data[fd], str, buffer, 1);
+	if (data[fd] && !str)
 		return (NULL);
 	return (str);
 }
